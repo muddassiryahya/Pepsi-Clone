@@ -1,0 +1,54 @@
+const vids = [
+    {
+        class:"hero__video",
+        src:"https://www.pepsi.com/en-us/refresh082123/media/PEPSI_2023_PR_Sizzle_1920px_trimmed.mp4", 
+        src_mb: "https://www.pepsi.com/en-us/refresh082123/media/PEPSI_2023_PR_Sizzle_1080px_trimmed.mp4",
+        type: "video/mp4",
+        poster: "https://www.pepsi.com/en-us/refresh082123/media/LoadVideo_1920.png",
+        autoplay: true,
+        loop: true,
+        playsinline: true,
+        muted: true
+    }
+]
+
+
+
+const otherVids = [
+
+    {
+        class: "other__video",
+        src:"https://www.pepsi.com/en-us/refresh082123/media/Titan_TR_Digital_30_PETD3091000H_CreativeX_sm.mp4", 
+        src_mb: "https://www.pepsi.com/en-us/refresh082123/media/Titan_TR_Digital_30_4x5_sm.mp4",
+        type: "video/mp4",
+        poster:"https://www.pepsi.com/en-us/refresh082123/media/titan_vid.png",
+        autoplay: true,
+        loop: true,
+        playsinline: true,
+        muted: true
+    }
+]
+
+
+isMobile = false;
+
+if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)){
+    // console.log("it's mobile");
+    isMobile = true;
+}
+
+const containers = document.querySelectorAll(".hero__video-container")
+
+for(i=0; i<containers.length; i++){
+    let video = vids[i]
+    containers[i].innerHTML = `<video controls controlsList="nodownload noremoteplayback" class=${video.class} kind="captions" type=${video.type} src=${isMobile != true ? video.src : (video.src_mb ? video.src_mb : video.src)} poster=${video.poster} autoplay=${video.autoplay} loop=${video.loop} playsinline=${video.playsinline} muted=${video.muted} />`
+}
+
+const otherContainers = document.querySelectorAll(".other__video-container");
+
+
+for(i=0; i<otherContainers.length; i++){
+    let otherVideos = otherVids[i]
+    otherContainers[i].innerHTML = `<video controls controlsList="nodownload noremoteplayback" class=${otherVideos.class} kind="captions" type=${otherVideos.type} src=${isMobile != true ? otherVideos.src : (otherVideos.src_mb ? otherVideos.src_mb : otherVideos.src)} poster=${otherVideos.poster} autoplay=${otherVideos.autoplay} loop=${otherVideos.loop} playsinline=${otherVideos.playsinline} muted=${otherVideos.muted} />`
+}
+

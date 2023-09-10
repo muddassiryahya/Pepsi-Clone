@@ -1,0 +1,35 @@
+// Check for IntersectionObserver support
+if ('IntersectionObserver' in window) {
+  document.addEventListener("DOMContentLoaded", function() {
+
+    function handleIntersection(entries) {
+      entries.map((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.style.height = "auto";
+          hiddenElement = entry.target.querySelector('.lazy-hide');
+          hiddenElement.classList.remove('lazy-hide');
+          observer.unobserve(entry.target);
+          console.log(hiddenElement);
+        }
+      });
+    }
+
+    const lazyTriggers = document.querySelectorAll('.lazy-trigger');
+    const observer = new IntersectionObserver(
+      handleIntersection,
+      { rootMargin: "100px",
+        root: null,
+        threshold: [0],
+
+    }
+    );
+    lazyTriggers.forEach(lazyTrigger => observer.observe(lazyTrigger));
+  });
+} else {
+  // No interaction support? Load all background images automatically
+  const lazyTriggers = document.querySelectorAll('.lazy-trigger');
+  lazyTriggers.forEach(lazyTrigger => {
+    lazyTrigger.classList.remove('a');
+    // header.style.backgroundImage = "url('"+header.dataset.bgimage+"')";
+  });
+}
